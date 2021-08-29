@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:751722301448:android:e467581d02cee0758d69bd",
+        "mobilesdk_app_id": "1:751722301448:android:d171ff1b73aa7ed98d69bd",
         "android_client_info": {
-          "package_name": "com.diablo.music"
+          "package_name": "suvraneel.bhuin.diablo_music_app"
         }
       },
       "oauth_client": [
