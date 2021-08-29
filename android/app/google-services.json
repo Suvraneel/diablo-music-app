@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "751722301448",
+    "project_id": "diablomusicv2",
+    "storage_bucket": "diablomusicv2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751722301448:android:e467581d02cee0758d69bd",
+        "android_client_info": {
+          "package_name": "com.diablo.music"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "751722301448-81vj879ch21tfiu72vp17ig64v4bikt3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUsXi5OBW88v-lCxWjv2iyxD7VZVpdU14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "751722301448-81vj879ch21tfiu72vp17ig64v4bikt3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
