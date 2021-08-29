@@ -34,6 +34,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   bool _obscureText = true;
   final AuthService _auth = AuthService();
+
   TextEditingController _email = new TextEditingController();
   TextEditingController _pass = new TextEditingController();
   dynamic user = null;
