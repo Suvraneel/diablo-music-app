@@ -6,8 +6,7 @@ import 'package:provider/provider.dart';
 import 'models/user.dart';
 import 'screens/wrapper.dart';
 
-// Import Dart Pages
-
+GlobalKey globalKey = GlobalKey();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamProvider<UserObj?>.value(
       value: AuthService().user,
-      catchError: (_,__) => null,
+      catchError: (_, __) => null,
       initialData: null,
       child: MaterialApp(
         home: Wrapper(),

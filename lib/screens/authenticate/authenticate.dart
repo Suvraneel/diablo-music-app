@@ -1,4 +1,5 @@
 import 'package:diablo_music_app/assets/icons/social_icons.dart';
+import 'package:diablo_music_app/screens/authenticate/signUp.dart';
 import 'package:diablo_music_app/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -216,7 +217,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                 ElevatedButton(
                     onPressed: () async {
-                      // user = await _auth.signIn(_email.text, _pass.text);
+                      user = await _auth.signInEmailPass(_email.text, _pass.text);
                       if (user != null) {
                         // signed in
                         Future.delayed(Duration(seconds: 2), () {
@@ -261,27 +262,27 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Colors.transparent,
                 ),
 
-                // ElevatedButton(
-                //     onPressed: () {
-                //       Navigator.push(
-                //         context,
-                //         MaterialPageRoute(builder: (context) => SignUp()),
-                //       );
-                //     },
-                //     style: ElevatedButton.styleFrom(
-                //         primary: Colors.black54,
-                //         onPrimary: Colors.amber,
-                //         padding: EdgeInsets.symmetric(horizontal: 80, vertical: 20),
-                //         textStyle: TextStyle(
-                //           fontSize: 13,
-                //           //fontWeight: FontWeight.bold
-                //         )),
-                //     child: Row(
-                //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //         children: <Widget>[
-                //           Text('Sign Up'),
-                //           Icon(Icons.face),
-                //         ])),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignUp()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.black54,
+                        onPrimary: Colors.amber,
+                        padding: EdgeInsets.symmetric(horizontal: 80, vertical: 20),
+                        textStyle: TextStyle(
+                          fontSize: 13,
+                          //fontWeight: FontWeight.bold
+                        )),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Text('Sign Up'),
+                          Icon(Icons.face),
+                        ])),
 
                 Divider(
                   color: Colors.transparent,
