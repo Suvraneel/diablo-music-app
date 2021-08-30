@@ -37,6 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   TextEditingController _email = new TextEditingController();
   TextEditingController _pass = new TextEditingController();
+  // ignore: avoid_init_to_null
   dynamic user = null;
 
   // Methods   /////////////////////////////////////////////////////////////////////////////////////

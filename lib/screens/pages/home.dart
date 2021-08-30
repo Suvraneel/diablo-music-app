@@ -1,4 +1,5 @@
 import 'package:diablo_music_app/services/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -15,7 +16,7 @@ class Home extends StatelessWidget {
         actions: <Widget>[
           TextButton.icon(
               onPressed: () async {
-                await _auth.signOut();
+                await FirebaseAuth.instance.signOut();
               },
               icon: Icon(Icons.logout_outlined),
               label: Text('Log Out'))

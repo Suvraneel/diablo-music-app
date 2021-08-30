@@ -5,6 +5,7 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   // create user object based on Firebase pack: UserCredential
   UserObj? _userFromFirebaseUserCred(User user) {
+    // ignore: unnecessary_null_comparison
     return user != null ? UserObj(uid: user.uid) : null;
   }
 
