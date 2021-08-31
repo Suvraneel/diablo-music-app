@@ -13,12 +13,12 @@ void toast(String txt) {
   );
 }
 
-class formInputBox extends StatelessWidget {
+class FormInputBox extends StatelessWidget {
   final String hint;
   final String label;
   final bool obscure;
 
-  const formInputBox({
+  const FormInputBox({
     Key? key,
     required TextEditingController control,
     required this.hint,
@@ -58,4 +58,29 @@ class formInputBox extends StatelessWidget {
           ),
         ));
   }
+}
+
+class Br extends StatelessWidget {
+  const Br({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Divider(
+      color: Colors.transparent,
+    );
+  }
+}
+
+
+ButtonStyle elevatedButtonStyle() {
+  return ElevatedButton.styleFrom(
+                    primary: Colors.black54,
+                    onPrimary: Colors.amber,
+                    padding: EdgeInsets.symmetric(horizontal: 80, vertical: 20),
+                    textStyle: TextStyle(
+                      fontSize: 13,
+                      //fontWeight: FontWeight.bold
+                    ));
 }

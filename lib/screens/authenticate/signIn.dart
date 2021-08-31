@@ -1,8 +1,9 @@
 import 'package:diablo_music_app/assets/icons/social_icons.dart';
 import 'package:diablo_music_app/screens/authenticate/signUp.dart';
+import 'package:diablo_music_app/screens/pages/home.dart';
 import 'package:diablo_music_app/services/auth.dart';
+import 'package:diablo_music_app/shared/uiComponents.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Authentication extends StatefulWidget {
@@ -98,73 +99,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
             child: ListView(
               children: <Widget>[
-                Divider(
-                  color: Colors.transparent,
-                ),
-                Divider(
-                  color: Colors.transparent,
-                ),
-                InkWell(
-                    onTap: () {},
-                    child: Theme(
-                      data: ThemeData(hintColor: Colors.amber),
-                      child: TextField(
-                        controller: _email,
-                        style: TextStyle(color: Colors.white),
-                        textAlignVertical: TextAlignVertical.center,
-                        textAlign: TextAlign.center,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.black54,
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(4)),
-                                borderSide:
-                                    BorderSide(width: 1, color: Colors.teal)),
-                            hintText: 'Enter your registered Email here...',
-                            labelText: 'Registered Email account',
-                            hintStyle: TextStyle(
-                              color: Colors.white70,
-                              fontStyle: FontStyle.italic,
-                            )),
-                      ),
-                    )),
-
-                Divider(
-                  color: Colors.transparent,
-                ),
-
-                InkWell(
-                    onTap: () {},
-                    child: Theme(
-                      data: ThemeData(hintColor: Colors.amber),
-                      child: TextField(
-                        controller: _pass,
-                        style: TextStyle(color: Colors.white),
-                        obscureText: _obscureText,
-                        textAlignVertical: TextAlignVertical.center,
-                        textAlign: TextAlign.center,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.black54,
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(4)),
-                                borderSide:
-                                    BorderSide(width: 1, color: Colors.teal)),
-                            hintText: 'Enter your password here...',
-                            labelText: 'Password',
-                            hintStyle: TextStyle(
-                              color: Colors.white70,
-                              fontStyle: FontStyle.italic,
-                            )),
-                      ),
-                    )),
-                Divider(
-                  color: Colors.transparent,
-                ),
+                Br(),
+                Br(),
+                FormInputBox(control: _email, hint: 'Enter your Email here...', label: 'Email', obscure: false),
+                Br(),
+                FormInputBox(control: _pass, hint: 'Enter your password here...', label: 'Password', obscure: true),
+                Br(),
                 TextButton(
                     onPressed: _toggle,
                     style: ElevatedButton.styleFrom(
@@ -185,35 +125,19 @@ class _MyHomePageState extends State<MyHomePage> {
                               : Icons.lock_outline),
                         ])),
 
-                Divider(
-                  color: Colors.transparent,
-                ),
-                Divider(
-                  color: Colors.transparent,
-                ),
-                Divider(
-                  color: Colors.transparent,
-                ),
+                Br(),
+                Br(),
+                Br(),
 
                 Row(
                   children: <Widget>[],
                 ),
 
-                Divider(
-                  color: Colors.transparent,
-                ),
-                Divider(
-                  color: Colors.transparent,
-                ),
-                Divider(
-                  color: Colors.transparent,
-                ),
-                Divider(
-                  color: Colors.transparent,
-                ),
-                Divider(
-                  color: Colors.transparent,
-                ),
+                Br(),
+                Br(),
+                Br(),
+                Br(),
+                Br(),
 
                 ElevatedButton(
                     onPressed: () async {
@@ -221,46 +145,21 @@ class _MyHomePageState extends State<MyHomePage> {
                       if (user != null) {
                         // signed in
                         Future.delayed(Duration(seconds: 2), () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => Player()),
-                          // );
-                          Fluttertoast.showToast(
-                            msg: "Welcome Back!",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.teal,
-                            textColor: Colors.amber,
-                            fontSize: 18.0,
-                          );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Home()),
+                        );
+                        toast("Welcome Back !");
                         });
                       } else {
-                        Fluttertoast.showToast(
-                          msg: "User not valid!",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 20.0,
-                        );
+                        toast("User not valid !");
                       }
                     },
                     child: Text('Submit'),
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.black54,
-                        onPrimary: Colors.amber,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 80, vertical: 20),
-                        textStyle: TextStyle(
-                          fontSize: 13,
-                          //fontWeight: FontWeight.bold
-                        ))),
+                    style: elevatedButtonStyle(),
+                    ),
 
-                Divider(
-                  color: Colors.transparent,
-                ),
+                Br(),
 
                 ElevatedButton(
                     onPressed: () {
@@ -269,14 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         MaterialPageRoute(builder: (context) => SignUp()),
                       );
                     },
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.black54,
-                        onPrimary: Colors.amber,
-                        padding: EdgeInsets.symmetric(horizontal: 80, vertical: 20),
-                        textStyle: TextStyle(
-                          fontSize: 13,
-                          //fontWeight: FontWeight.bold
-                        )),
+                    style: elevatedButtonStyle(),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
@@ -284,9 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Icon(Icons.face),
                         ])),
 
-                Divider(
-                  color: Colors.transparent,
-                ),
+                Br(),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

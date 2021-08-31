@@ -2,7 +2,7 @@ import 'package:diablo_music_app/screens/pages/home.dart';
 import 'package:diablo_music_app/services/auth.dart';
 import 'package:diablo_music_app/shared/uiComponents.dart';
 import 'package:flutter/material.dart';
-import 'authenticate.dart';
+import 'signIn.dart';
 // Import UI Components
 // import 'package:diablo_music_app/shared/toast.dart';
 
@@ -18,6 +18,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController _pass = new TextEditingController();
   TextEditingController _passc = new TextEditingController();
 
+  // ignore: avoid_init_to_null
   dynamic user = null;
 
   // text field state
@@ -45,59 +46,57 @@ class _SignUpState extends State<SignUp> {
                 height: 100.0,
                 width: 50.0,
               ),
-              Divider(
-                color: Colors.transparent,
-              ),
-              formInputBox(control: _name, hint: 'Enter your username here...', label: 'Username', obscure: true),
-              Divider(
-                color: Colors.transparent,
-              ),
-
-              formInputBox(control: _email, hint: 'Enter your Email here...', label: 'Email', obscure: false),
-              Divider(
-                color: Colors.transparent,
-              ),
-              formInputBox(control: _pass, hint: 'Enter your password here...', label: 'Password', obscure: true),
-              Divider(
-                color: Colors.transparent,
-              ),
-              formInputBox(control: _passc, hint: 'Re-enter same password here...', label: 'Confirm Password', obscure: true),
-              Divider(
-                color: Colors.transparent,
-              ),
+              Br(),
+              FormInputBox(
+                  control: _name,
+                  hint: 'Enter your username here...',
+                  label: 'Username',
+                  obscure: true),
+              Br(),
+              FormInputBox(
+                  control: _email,
+                  hint: 'Enter your Email here...',
+                  label: 'Email',
+                  obscure: false),
+              Br(),
+              FormInputBox(
+                  control: _pass,
+                  hint: 'Enter your password here...',
+                  label: 'Password',
+                  obscure: true),
+              Br(),
+              FormInputBox(
+                  control: _passc,
+                  hint: 'Re-enter same password here...',
+                  label: 'Confirm Password',
+                  obscure: true),
+              Br(),
               ElevatedButton(
-                  child: Text("SignUp"),
-                  onPressed: () async {
-                    dynamic result;
-                    if (_pass.text == _passc.text) {
-                      result = await _auth.signUpEmailPass(
-                          _name.text, _email.text, _pass.text);
-                    } else {
-                      toast("Passwords DON'T match... Try Again");
-                    }
+                child: Text("SignUp"),
+                onPressed: () async {
+                  dynamic result;
+                  if (_pass.text == _passc.text) {
+                    result = await _auth.signUpEmailPass(
+                        _name.text, _email.text, _pass.text);
+                  } else {
+                    toast("Passwords DON'T match... Try Again");
+                  }
 
-                    if (result != null) {
-                      // signed in
-                      toast("Registration successful !");
-                      Future.delayed(Duration(seconds: 2), () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Home()),
-                        );
-                      });
-                    } else {
-                      toast("Registration not valid !");
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.black54,
-                      onPrimary: Colors.amber,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 80, vertical: 20),
-                      textStyle: TextStyle(
-                        fontSize: 13,
-                        //fontWeight: FontWeight.bold
-                      ))),
+                  if (result != null) {
+                    // signed in
+                    toast("Registration successful !");
+                    Future.delayed(Duration(seconds: 2), () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Home()),
+                      );
+                    });
+                  } else {
+                    toast("Registration not valid !");
+                  }
+                },
+                style: elevatedButtonStyle(),
+              ),
               FloatingActionButton(
                 heroTag: "btn6",
                 onPressed: () {

@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'models/user.dart';
 import 'screens/wrapper.dart';
 
-GlobalKey globalKey = GlobalKey();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

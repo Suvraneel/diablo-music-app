@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'authenticate/authenticate.dart';
+import 'authenticate/signIn.dart';
 import 'package:diablo_music_app/models/user.dart';
 
 import 'pages/home.dart';
