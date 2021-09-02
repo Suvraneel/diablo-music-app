@@ -1,4 +1,5 @@
 import 'package:diablo_music_app/screens/pages/home.dart';
+import 'package:diablo_music_app/screens/pages/player.dart';
 import 'package:diablo_music_app/services/auth.dart';
 import 'package:diablo_music_app/shared/uiComponents.dart';
 import 'package:flutter/material.dart';

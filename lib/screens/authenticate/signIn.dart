@@ -1,6 +1,7 @@
 import 'package:diablo_music_app/assets/icons/social_icons.dart';
 import 'package:diablo_music_app/screens/authenticate/signUp.dart';
 import 'package:diablo_music_app/screens/pages/home.dart';
+import 'package:diablo_music_app/screens/pages/player.dart';
 import 'package:diablo_music_app/services/auth.dart';
 import 'package:diablo_music_app/shared/uiComponents.dart';
 import 'package:flutter/material.dart';

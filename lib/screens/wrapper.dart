@@ -4,6 +4,7 @@ import 'authenticate/signIn.dart';
 import 'package:diablo_music_app/models/user.dart';
 
 import 'pages/home.dart';
+import 'package:diablo_music_app/screens/pages/player.dart';
 
 ////////////////////// Listen for Auth Changes
 class Wrapper extends StatelessWidget {

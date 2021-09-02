@@ -1,3 +1,4 @@
+import 'package:diablo_music_app/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
@@ -6,19 +7,20 @@ import 'package:flutter/services.dart';
 import 'package:audio_manager/audio_manager.dart';
 import 'package:path_provider/path_provider.dart';
 
-class Player extends StatefulWidget {
+class Home extends StatefulWidget {
   @override
-  _PlayerState createState() => _PlayerState();
+  _HomeState createState() => _HomeState();
 }
 
-class _PlayerState extends State<Player> {
+class _HomeState extends State<Home> {
+  final AuthService _auth = AuthService();
   String _platformVersion = 'Unknown';
   bool isPlaying = false;
-  Duration _duration;
-  Duration _position;
-  double _slider;
-  double _sliderVolume;
-  String _error;
+  Duration _duration = Duration(seconds: 0);
+  Duration _position = Duration(seconds: 0);
+  double _slider = 0.0;
+  double _sliderVolume = 0.0;
+  String _error = "";
   num curIndex = 0;
   PlayMode playMode = AudioManager.instance.playMode;
 
@@ -48,14 +50,15 @@ class _PlayerState extends State<Player> {
 
   @override
   void dispose() {
+    // 释放所有资源
     AudioManager.instance.release();
     super.dispose();
   }
 
   void setupAudio() {
     List<AudioInfo> _list = [];
-    list.forEach((item) => _list.add(AudioInfo(item["url"],
-        title: item["title"], desc: item["desc"], coverUrl: item["coverUrl"])));
+    list.forEach((item) => _list.add(AudioInfo(item["url"].toString(),
+        title: item["title"].toString(), desc: item["desc"].toString(), coverUrl: item["coverUrl"].toString())));
 
     AudioManager.instance.audioList = _list;
     AudioManager.instance.intercepter = true;
@@ -74,7 +77,7 @@ class _PlayerState extends State<Player> {
           break;
         case AudioManagerEvents.ready:
           print("ready to play");
-          _error = null;
+          _error = "";
           _sliderVolume = AudioManager.instance.volume;
           _position = AudioManager.instance.position;
           _duration = AudioManager.instance.duration;
@@ -120,17 +123,17 @@ class _PlayerState extends State<Player> {
 
   void loadFile() async {
     // read bundle file to local path
-    final audioFile = await rootBundle.load("assets/aLIEz.m4a");
+    final audioFile = await rootBundle.load("assets/audio/audio4.mp3");
     final audio = audioFile.buffer.asUint8List();
 
     final appDocDir = await getApplicationDocumentsDirectory();
     print(appDocDir);
 
-    final file = File("${appDocDir.path}/aLIEz.m4a");
+    final file = File("${appDocDir.path}/audio4.mp3");
     file.writeAsBytesSync(audio);
 
     AudioInfo info = AudioInfo("file://${file.path}",
-        title: "file", desc: "local file", coverUrl: "assets/aLIEz.jpg");
+        title: "file", desc: "local file", coverUrl: "assets/images/skull.png");
 
     list.add(info.toJson());
     AudioManager.instance.audioList.add(info);
@@ -166,13 +169,19 @@ class _PlayerState extends State<Player> {
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: volumeFrame(),
               ),
+                        TextButton.icon(
+              onPressed: () async {
+                await _auth.signOut();
+              },
+              icon: Icon(Icons.logout_outlined),
+              label: Text('Log Out')),
               Expanded(
                 child: ListView.separated(
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text(list[index]["title"],
+                        title: Text(list[index]["title"].toString(),
                             style: TextStyle(fontSize: 18)),
-                        subtitle: Text(list[index]["desc"]),
+                        subtitle: Text(list[index]["desc"].toString()),
                         onTap: () => AudioManager.instance.play(index: index),
                       );
                     },
@@ -181,9 +190,9 @@ class _PlayerState extends State<Player> {
                     itemCount: list.length),
               ),
               Center(
-                  child: Text(_error != null
+                  child: Text(_error != ""
                       ? _error
-                      : "${AudioManager.instance.info.title} lrc text: $_position")),
+                      : "${AudioManager.instance.info!.title} lrc text: $_position")),
               bottomPanel()
             ],
           ),
@@ -295,14 +304,14 @@ class _PlayerState extends State<Player> {
                   inactiveTrackColor: Colors.grey,
                 ),
                 child: Slider(
-                  value: _slider ?? 0,
+                  value: _slider,
                   onChanged: (value) {
                     setState(() {
                       _slider = value;
                     });
                   },
                   onChangeEnd: (value) {
-                    if (_duration != null) {
+                    if (_duration != Duration(seconds: 0)) {
                       Duration msec = Duration(
                           milliseconds:
                               (_duration.inMilliseconds * value).round());
@@ -321,7 +330,7 @@ class _PlayerState extends State<Player> {
   }
 
   String _formatDuration(Duration d) {
-    if (d == null) return "--:--";
+    if (d == Duration(seconds:0)) return "--:--";
     int minute = d.inMinutes;
     int second = (d.inSeconds > 60) ? (d.inSeconds % 60) : d.inSeconds;
     String format = ((minute < 10) ? "0$minute" : "$minute") +
@@ -345,7 +354,7 @@ class _PlayerState extends State<Player> {
           child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 0),
               child: Slider(
-                value: _sliderVolume ?? 0,
+                value: _sliderVolume,
                 onChanged: (value) {
                   setState(() {
                     _sliderVolume = value;

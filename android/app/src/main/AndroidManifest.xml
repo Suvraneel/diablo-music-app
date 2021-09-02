@@ -2,7 +2,9 @@
     package="suvraneel.bhuin.diablo_music_app">
    <application
         android:label="diablo_music_app"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true"
+        >
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
