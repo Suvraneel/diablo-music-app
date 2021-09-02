@@ -24,7 +24,8 @@ class FormInputBox extends StatelessWidget {
     required this.hint,
     required this.label,
     required this.obscure,
-  }) : _email = control, super(key: key);
+  })  : _email = control,
+        super(key: key);
 
   final TextEditingController _email;
 
@@ -45,10 +46,8 @@ class FormInputBox extends StatelessWidget {
                 filled: true,
                 fillColor: Colors.black54,
                 enabledBorder: OutlineInputBorder(
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(4)),
-                    borderSide:
-                        BorderSide(width: 1, color: Colors.teal)),
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    borderSide: BorderSide(width: 1, color: Colors.teal)),
                 hintText: hint,
                 labelText: label,
                 hintStyle: TextStyle(
@@ -73,14 +72,21 @@ class Br extends StatelessWidget {
   }
 }
 
-
 ButtonStyle elevatedButtonStyle() {
   return ElevatedButton.styleFrom(
-                    primary: Colors.black54,
-                    onPrimary: Colors.amber,
-                    padding: EdgeInsets.symmetric(horizontal: 80, vertical: 20),
-                    textStyle: TextStyle(
-                      fontSize: 13,
-                      //fontWeight: FontWeight.bold
-                    ));
+      primary: Colors.black54,
+      onPrimary: Colors.amber,
+      padding: EdgeInsets.symmetric(horizontal: 80, vertical: 20),
+      textStyle: TextStyle(
+        fontSize: 13,
+        //fontWeight: FontWeight.bold
+      ));
+}
+
+TextStyle listStyle() {
+  return TextStyle(
+    backgroundColor: Colors.black87,
+    fontSize: 18,
+    color: Colors.amber,
+  );
 }

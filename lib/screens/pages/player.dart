@@ -1,4 +1,5 @@
 import 'package:diablo_music_app/services/auth.dart';
+import 'package:diablo_music_app/shared/uiComponents.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
@@ -28,8 +29,8 @@ class _HomeState extends State<Home> {
     {
       "title": "Assets",
       "desc": "assets playback",
-      "url": "assets/xv.mp3",
-      "coverUrl": "assets/ic_launcher.png"
+      "url": "assets/audio/audio4.mp3",
+      "coverUrl": "assets/images/skull.png"
     },
     {
       "title": "network",
@@ -157,44 +158,62 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.teal,
+      ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin audio player'),
+          title: const Text('Music Library'),
+          actions: <Widget>[
+                IconButton(
+                onPressed: () async {
+                  await _auth.signOut();
+                },
+                icon: Icon(Icons.logout_outlined,
+                color: Colors.white,
+                ),
+                tooltip: 'Log Out',
+              ),
+          ],
         ),
         body: Center(
-          child: Column(
-            children: <Widget>[
-              Text('Running on: $_platformVersion\n'),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: volumeFrame(),
-              ),
-                        TextButton.icon(
-              onPressed: () async {
-                await _auth.signOut();
-              },
-              icon: Icon(Icons.logout_outlined),
-              label: Text('Log Out')),
-              Expanded(
-                child: ListView.separated(
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(list[index]["title"].toString(),
-                            style: TextStyle(fontSize: 18)),
-                        subtitle: Text(list[index]["desc"].toString()),
-                        onTap: () => AudioManager.instance.play(index: index),
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) =>
-                        Divider(),
-                    itemCount: list.length),
-              ),
-              Center(
-                  child: Text(_error != ""
-                      ? _error
-                      : "${AudioManager.instance.info!.title} lrc text: $_position")),
-              bottomPanel()
-            ],
+          child: Container(
+            decoration: BoxDecoration(
+            image: DecorationImage(
+            image: AssetImage("assets/images/alienware.jpg"),
+            fit: BoxFit.cover,
+          )),
+            child: Column (
+              children: <Widget>[
+                Text('Running on: $_platformVersion\n',
+                  style: listStyle(),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: volumeFrame(),
+                ),
+                Expanded(
+                  child: ListView.separated(
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(list[index]["title"].toString(),
+                            style: listStyle()),
+                          subtitle: Text(list[index]["desc"].toString(),
+                            style: listStyle()),
+                          onTap: () => AudioManager.instance.play(index: index),
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) =>
+                          Divider(),
+                      itemCount: list.length),
+                ),
+                Center(
+                    child: Text(_error != ""
+                        ? _error
+                        : "${AudioManager.instance.info!.title} lrc text: $_position")),
+                bottomPanel()
+              ],
+            ),
           ),
         ),
       ),
@@ -222,7 +241,7 @@ class _HomeState extends State<Home> {
                 iconSize: 36,
                 icon: Icon(
                   Icons.skip_previous,
-                  color: Colors.black,
+                  color: Colors.amber,
                 ),
                 onPressed: () => AudioManager.instance.previous()),
             IconButton(
@@ -234,20 +253,20 @@ class _HomeState extends State<Home> {
               icon: Icon(
                 isPlaying ? Icons.pause : Icons.play_arrow,
                 size: 48.0,
-                color: Colors.black,
+                color: Colors.amber,
               ),
             ),
             IconButton(
                 iconSize: 36,
                 icon: Icon(
                   Icons.skip_next,
-                  color: Colors.black,
+                  color: Colors.amber,
                 ),
                 onPressed: () => AudioManager.instance.next()),
             IconButton(
                 icon: Icon(
                   Icons.stop,
-                  color: Colors.black,
+                  color: Colors.amber,
                 ),
                 onPressed: () => AudioManager.instance.stop()),
           ],
@@ -261,20 +280,19 @@ class _HomeState extends State<Home> {
       case PlayMode.sequence:
         return Icon(
           Icons.repeat,
-          color: Colors.black,
+          color: Colors.amber,
         );
       case PlayMode.shuffle:
         return Icon(
           Icons.shuffle,
-          color: Colors.black,
+          color: Colors.amber,
         );
       case PlayMode.single:
         return Icon(
           Icons.repeat_one,
-          color: Colors.black,
+          color: Colors.amber,
         );
     }
-    return Container();
   }
 
   Widget songProgress(BuildContext context) {
@@ -345,7 +363,7 @@ class _HomeState extends State<Home> {
           padding: EdgeInsets.all(0),
           icon: Icon(
             Icons.audiotrack,
-            color: Colors.black,
+            color: Colors.amber,
           ),
           onPressed: () {
             AudioManager.instance.setVolume(0);
