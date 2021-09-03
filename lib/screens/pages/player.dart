@@ -51,7 +51,6 @@ class _HomeState extends State<Home> {
 
   @override
   void dispose() {
-    // 释放所有资源
     AudioManager.instance.release();
     super.dispose();
   }
@@ -204,7 +203,7 @@ class _HomeState extends State<Home> {
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) =>
-                          Divider(),
+                      Divider(),
                       itemCount: list.length),
                 ),
                 Center(
